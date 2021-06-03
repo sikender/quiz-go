@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
+	"math/rand"
 	"os"
 	"strings"
 	"time"
@@ -24,6 +25,11 @@ func parseLines(lines [][]string) []problem {
 			answer:   strings.TrimSpace(line[1]),
 		}
 	}
+
+	rand.Seed(time.Now().UnixNano())
+	rand.Shuffle(len(problems), func(i, j int) {
+		problems[i], problems[j] = problems[j], problems[i]
+	})
 
 	return problems
 }
